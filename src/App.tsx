@@ -47,15 +47,35 @@ const AppBar = (props: any) => (
   />
 );
 
+function shuffleArray(array: any) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 const CardAssignments = () => {
+  const cardCount = 20;
+  const playerCount = 3;
+  const cards = Array.from(Array(cardCount).keys());
+  shuffleArray(cards);
+
+  const choices: any[] = [];
+  console.log(cards);
+  for (let _player of Array(playerCount)) {
+    choices.push(cards.splice(0, 2));
+  }
+
   return (
     <Box flex align="center" justify="center">
       <Card height="small" width="small" background="light-1">
         <CardHeader pad="medium">Cards</CardHeader>
         <CardBody pad="medium">
-          <Box flex align="center" direction="row" justify="center">
+          <Box flex align="center" justify="center">
             {[...Array(3)].map((el, idx) => (
-              <div>Player {idx + 1}</div>
+              <div>
+                Player {idx + 1}: {choices[idx].join(', ')}
+              </div>
             ))}
           </Box>
         </CardBody>
