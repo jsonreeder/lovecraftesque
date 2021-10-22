@@ -8,6 +8,10 @@ import {
   Grommet,
   Layer,
   ResponsiveContext,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
 } from 'grommet';
 import { FormClose, Notification } from 'grommet-icons';
 
@@ -38,6 +42,21 @@ const AppBar = (props: any) => (
   />
 );
 
+const AppBody = () => {
+  return (
+    <Box flex align="center" justify="center">
+      <Card height="small" width="small" background="light-1">
+        <CardHeader pad="medium">Header</CardHeader>
+        <CardBody pad="medium">Body</CardBody>
+        <CardFooter pad={{ horizontal: 'small' }} background="light-2">
+          <Button hoverIndicator />
+          <Button hoverIndicator />
+        </CardFooter>
+      </Card>
+    </Box>
+  );
+};
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -56,9 +75,7 @@ function App() {
               />
             </AppBar>
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
-              <Box flex align="center" justify="center">
-                app body
-              </Box>
+              <AppBody />
               {!showSidebar || size !== 'small' ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
