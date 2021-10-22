@@ -47,6 +47,23 @@ const AppBar = (props: any) => (
   />
 );
 
+const CardAssignments = () => {
+  return (
+    <Box flex align="center" justify="center">
+      <Card height="small" width="small" background="light-1">
+        <CardHeader pad="medium">Cards</CardHeader>
+        <CardBody pad="medium">
+          <Box flex align="center" direction="row" justify="center">
+            {[...Array(3)].map((el, idx) => (
+              <div>Player {idx + 1}</div>
+            ))}
+          </Box>
+        </CardBody>
+      </Card>
+    </Box>
+  );
+};
+
 const AppBody = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
 
@@ -99,6 +116,7 @@ function App() {
             </AppBar>
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
               <AppBody />
+              <CardAssignments />
               {!showSidebar || size !== 'small' ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
