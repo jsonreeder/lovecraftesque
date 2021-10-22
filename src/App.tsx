@@ -1,8 +1,11 @@
 import React from 'react';
-import { Grommet } from 'grommet';
+import { Box, Grommet } from 'grommet';
 
 const theme = {
   global: {
+    colors: {
+      brand: '#228BE6',
+    },
     font: {
       family: 'Roboto',
       size: '18px',
@@ -11,22 +14,24 @@ const theme = {
   },
 };
 
+const AppBar = (props: any) => (
+  <Box
+    tag="header"
+    direction="row"
+    align="center"
+    justify="between"
+    background="brand"
+    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
+    elevation="medium"
+    style={{ zIndex: '1' }}
+    {...props}
+  />
+);
+
 function App() {
   return (
     <Grommet theme={theme}>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar>Hello Grommet!</AppBar>
     </Grommet>
   );
 }
