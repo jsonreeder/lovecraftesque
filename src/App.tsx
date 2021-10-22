@@ -20,7 +20,13 @@ import {
 } from 'grommet-icons';
 import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  doc,
+  getDoc,
+} from 'firebase/firestore';
 import {
   BrowserRouter as Router,
   Switch,
@@ -168,7 +174,10 @@ const AppBody = () => {
 };
 
 const Session = () => {
-  let { sessionId } = useParams<{ sessionId: string }>();
+  const { sessionId } = useParams<{ sessionId: string }>();
+  const docRef = doc(db, 'sessions', sessionId);
+  getDoc(docRef).then((res) => console.log(res.data()));
+
   return <div>{sessionId}</div>;
 };
 
