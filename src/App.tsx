@@ -111,6 +111,7 @@ const Picker = (props: PickerProps) => {
             <Button
               icon={<Add />}
               onClick={() => setNumberOfPlayers(numberOfPlayers + 1)}
+              disabled={numberOfPlayers >= 5}
             />
           </Box>
         </CardBody>
