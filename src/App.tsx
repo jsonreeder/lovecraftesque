@@ -19,6 +19,18 @@ import {
   Subtract,
 } from 'grommet-icons';
 import React, { useState } from 'react';
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCKI9WiMeXBX7qtalf_yAkdTgwzJsdxKcc',
+  authDomain: 'lovecraftesque.firebaseapp.com',
+  projectId: 'lovecraftesque',
+  storageBucket: 'lovecraftesque.appspot.com',
+  messagingSenderId: '959416678806',
+  appId: '1:959416678806:web:3b5ce891e92f73e8bfc5b7',
+};
+
+const app = initializeApp(firebaseConfig);
 
 const theme = {
   global: {
