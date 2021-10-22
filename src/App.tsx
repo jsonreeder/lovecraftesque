@@ -54,15 +54,19 @@ function shuffleArray(array: any) {
   }
 }
 
-const CardAssignments = () => {
+type CardAssignmentsProps = {
+  numberOfPlayers: number;
+};
+
+const CardAssignments = (props: CardAssignmentsProps) => {
+  const { numberOfPlayers } = props;
   const cardCount = 20;
-  const playerCount = 3;
   const cards = Array.from(Array(cardCount).keys());
   shuffleArray(cards);
 
   const choices: any[] = [];
   console.log(cards);
-  for (let _player of Array(playerCount)) {
+  for (let _player of Array(numberOfPlayers)) {
     choices.push(cards.splice(0, 2));
   }
 
@@ -72,7 +76,7 @@ const CardAssignments = () => {
         <CardHeader pad="medium">Cards</CardHeader>
         <CardBody pad="medium">
           <Box flex align="center" justify="center">
-            {[...Array(3)].map((el, idx) => (
+            {[...Array(numberOfPlayers)].map((el, idx) => (
               <div>
                 Player {idx + 1}: {choices[idx].join(', ')}
               </div>
@@ -84,8 +88,13 @@ const CardAssignments = () => {
   );
 };
 
-const AppBody = () => {
-  const [numberOfPlayers, setNumberOfPlayers] = useState(2);
+type PickerProps = {
+  numberOfPlayers: number;
+  setNumberOfPlayers: (number: any) => void;
+};
+
+const Picker = (props: PickerProps) => {
+  const { numberOfPlayers, setNumberOfPlayers } = props;
 
   return (
     <Box flex align="center" justify="center">
@@ -117,6 +126,19 @@ const AppBody = () => {
   );
 };
 
+const AppBody = () => {
+  const [numberOfPlayers, setNumberOfPlayers] = useState(2);
+  return (
+    <Box>
+      <Picker
+        numberOfPlayers={numberOfPlayers}
+        setNumberOfPlayers={setNumberOfPlayers}
+      />
+      <CardAssignments numberOfPlayers={numberOfPlayers} />
+    </Box>
+  );
+};
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -136,7 +158,6 @@ function App() {
             </AppBar>
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
               <AppBody />
-              <CardAssignments />
               {!showSidebar || size !== 'small' ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
