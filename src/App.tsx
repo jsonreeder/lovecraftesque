@@ -48,7 +48,7 @@ function App() {
           <Box fill>
             <AppBar>
               <Heading level="3" margin="none">
-                My App
+                Lovecraftesque
               </Heading>
               <Button
                 icon={<Notification />}
