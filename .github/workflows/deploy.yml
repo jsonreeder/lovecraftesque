@@ -2,11 +2,11 @@ name: Deploy
 on: [push]
 jobs:
   deploy:
-    name: Deploy to Firebase Hosting
+    name: Build and deploy to Firebase Hosting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # - run: npm ci && npm run build
+      - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
