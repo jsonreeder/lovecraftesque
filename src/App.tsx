@@ -66,7 +66,6 @@ const CardAssignments = (props: CardAssignmentsProps) => {
   shuffleArray(cards);
 
   const choices: any[] = [];
-  console.log(cards);
   for (let _player of Array(numberOfPlayers)) {
     choices.push(cards.splice(0, cardsPerPlayer));
   }
