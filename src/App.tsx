@@ -20,6 +20,7 @@ import {
 } from 'grommet-icons';
 import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCKI9WiMeXBX7qtalf_yAkdTgwzJsdxKcc',
@@ -31,6 +32,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const theme = {
   global: {
@@ -132,7 +134,13 @@ const Picker = (props: PickerProps) => {
           pad={{ horizontal: 'small' }}
           background="light-2"
         >
-          <Button icon={<FormNextLink />} hoverIndicator />
+          <Button
+            icon={<FormNextLink />}
+            hoverIndicator
+            onClick={() =>
+              addDoc(collection(db, 'sessions'), { numberOfPlayers })
+            }
+          />
         </CardFooter>
       </Card>
     </Box>
