@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
-
 import {
   Box,
   Button,
-  Collapsible,
-  Heading,
-  Grommet,
-  Layer,
-  ResponsiveContext,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
+  Collapsible,
+  Grommet,
+  Heading,
+  Layer,
+  ResponsiveContext,
 } from 'grommet';
 import {
   Add,
-  Subtract,
   FormClose,
   FormNextLink,
   Notification,
+  Subtract,
 } from 'grommet-icons';
+import React, { useState } from 'react';
 
 const theme = {
   global: {
