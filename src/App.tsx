@@ -77,7 +77,7 @@ const CardAssignments = (props: CardAssignmentsProps) => {
         <CardBody pad="medium">
           <Box flex align="center" justify="center">
             {[...Array(numberOfPlayers)].map((el, idx) => (
-              <div>
+              <div key={idx}>
                 Player {idx + 1}: {choices[idx].join(', ')}
               </div>
             ))}
