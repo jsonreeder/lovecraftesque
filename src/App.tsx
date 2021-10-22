@@ -61,13 +61,14 @@ type CardAssignmentsProps = {
 const CardAssignments = (props: CardAssignmentsProps) => {
   const { numberOfPlayers } = props;
   const cardCount = 20;
+  const cardsPerPlayer = numberOfPlayers === 2 ? 2 : 1;
   const cards = Array.from(Array(cardCount).keys());
   shuffleArray(cards);
 
   const choices: any[] = [];
   console.log(cards);
   for (let _player of Array(numberOfPlayers)) {
-    choices.push(cards.splice(0, 2));
+    choices.push(cards.splice(0, cardsPerPlayer));
   }
 
   return (
