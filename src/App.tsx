@@ -129,7 +129,7 @@ const Picker = (props: PickerProps) => {
 const AppBody = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
   return (
-    <Box>
+    <Box fill>
       <Picker
         numberOfPlayers={numberOfPlayers}
         setNumberOfPlayers={setNumberOfPlayers}
