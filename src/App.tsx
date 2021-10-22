@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Heading, Grommet } from 'grommet';
+import { Box, Button, Collapsible, Heading, Grommet } from 'grommet';
 import { Notification } from 'grommet-icons';
 
 const theme = {
@@ -49,8 +49,9 @@ function App() {
           <Box flex align="center" justify="center">
             app body
           </Box>
-          {showSidebar && (
+          <Collapsible direction="horizontal" open={showSidebar}>
             <Box
+              flex
               width="medium"
               background="light-2"
               elevation="small"
@@ -59,7 +60,7 @@ function App() {
             >
               sidebar
             </Box>
-          )}
+          </Collapsible>
         </Box>
       </Box>
     </Grommet>
