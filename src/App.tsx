@@ -21,6 +21,7 @@ import {
 import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCKI9WiMeXBX7qtalf_yAkdTgwzJsdxKcc',
@@ -164,63 +165,65 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <Grommet theme={theme} full>
-      <ResponsiveContext.Consumer>
-        {(size) => (
-          <Box fill>
-            <AppBar>
-              <Heading level="3" margin="none">
-                Lovecraftesque
-              </Heading>
-              <Button
-                icon={<Notification />}
-                onClick={() => setShowSidebar(!showSidebar)}
-              />
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
-              <AppBody />
-              {!showSidebar || size !== 'small' ? (
-                <Collapsible direction="horizontal" open={showSidebar}>
-                  <Box
-                    flex
-                    width="medium"
-                    background="light-2"
-                    elevation="small"
-                    align="center"
-                    justify="center"
-                  >
-                    sidebar
-                  </Box>
-                </Collapsible>
-              ) : (
-                <Layer>
-                  <Box
-                    background="light-2"
-                    tag="header"
-                    justify="end"
-                    align="center"
-                    direction="row"
-                  >
-                    <Button
-                      icon={<FormClose />}
-                      onClick={() => setShowSidebar(false)}
-                    />
-                  </Box>
-                  <Box
-                    fill
-                    background="light-2"
-                    align="center"
-                    justify="center"
-                  >
-                    sidebar
-                  </Box>
-                </Layer>
-              )}
+    <Router>
+      <Grommet theme={theme} full>
+        <ResponsiveContext.Consumer>
+          {(size) => (
+            <Box fill>
+              <AppBar>
+                <Heading level="3" margin="none">
+                  Lovecraftesque
+                </Heading>
+                <Button
+                  icon={<Notification />}
+                  onClick={() => setShowSidebar(!showSidebar)}
+                />
+              </AppBar>
+              <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
+                <AppBody />
+                {!showSidebar || size !== 'small' ? (
+                  <Collapsible direction="horizontal" open={showSidebar}>
+                    <Box
+                      flex
+                      width="medium"
+                      background="light-2"
+                      elevation="small"
+                      align="center"
+                      justify="center"
+                    >
+                      sidebar
+                    </Box>
+                  </Collapsible>
+                ) : (
+                  <Layer>
+                    <Box
+                      background="light-2"
+                      tag="header"
+                      justify="end"
+                      align="center"
+                      direction="row"
+                    >
+                      <Button
+                        icon={<FormClose />}
+                        onClick={() => setShowSidebar(false)}
+                      />
+                    </Box>
+                    <Box
+                      fill
+                      background="light-2"
+                      align="center"
+                      justify="center"
+                    >
+                      sidebar
+                    </Box>
+                  </Layer>
+                )}
+              </Box>
             </Box>
-          </Box>
-        )}
-      </ResponsiveContext.Consumer>
-    </Grommet>
+          )}
+        </ResponsiveContext.Consumer>
+      </Grommet>
+    </Router>
   );
 }
 
