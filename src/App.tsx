@@ -21,7 +21,13 @@ import {
 import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCKI9WiMeXBX7qtalf_yAkdTgwzJsdxKcc',
@@ -161,6 +167,11 @@ const AppBody = () => {
   );
 };
 
+const Session = () => {
+  let { sessionId } = useParams<{ sessionId: string }>();
+  return <div>{sessionId}</div>;
+};
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -180,7 +191,14 @@ function App() {
                 />
               </AppBar>
               <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
-                <AppBody />
+                <Switch>
+                  <Route path="/sessions/:sessionId">
+                    <Session />
+                  </Route>
+                  <Route path="/">
+                    <AppBody />
+                  </Route>
+                </Switch>
                 {!showSidebar || size !== 'small' ? (
                   <Collapsible direction="horizontal" open={showSidebar}>
                     <Box
