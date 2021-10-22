@@ -13,7 +13,13 @@ import {
   CardBody,
   CardFooter,
 } from 'grommet';
-import { FormClose, Notification } from 'grommet-icons';
+import {
+  Add,
+  Subtract,
+  FormClose,
+  FormNextLink,
+  Notification,
+} from 'grommet-icons';
 
 const theme = {
   global: {
@@ -43,14 +49,32 @@ const AppBar = (props: any) => (
 );
 
 const AppBody = () => {
+  const [numberOfPlayers, setNumberOfPlayers] = useState(2);
+
   return (
     <Box flex align="center" justify="center">
       <Card height="small" width="small" background="light-1">
-        <CardHeader pad="medium">Header</CardHeader>
-        <CardBody pad="medium">Body</CardBody>
-        <CardFooter pad={{ horizontal: 'small' }} background="light-2">
-          <Button hoverIndicator />
-          <Button hoverIndicator />
+        <CardHeader pad="medium">Number of Players</CardHeader>
+        <CardBody pad="medium">
+          <Box flex align="center" direction="row" justify="center">
+            <Button
+              icon={<Subtract />}
+              onClick={() => setNumberOfPlayers(numberOfPlayers - 1)}
+              disabled={numberOfPlayers <= 2}
+            />
+            {numberOfPlayers}
+            <Button
+              icon={<Add />}
+              onClick={() => setNumberOfPlayers(numberOfPlayers + 1)}
+            />
+          </Box>
+        </CardBody>
+        <CardFooter
+          justify="end"
+          pad={{ horizontal: 'small' }}
+          background="light-2"
+        >
+          <Button icon={<FormNextLink />} hoverIndicator />
         </CardFooter>
       </Card>
     </Box>
