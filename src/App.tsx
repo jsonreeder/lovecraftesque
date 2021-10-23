@@ -162,36 +162,35 @@ const Player = () => {
   const { sessionId, playerId } =
     useParams<{ sessionId: string; playerId: string }>();
   const docRef = doc(db, 'sessions', sessionId, 'players', playerId);
-  const [data, setData] = useState<any>(null);
   const storage = getStorage(app);
-  const [image, setImage] = useState<any>(null);
-  const [images, setImages] = useState<any>([]);
+  const [images, setImages] = useState<any>(null);
   useEffect(() => {
-    getDoc(docRef).then((docSnapshot) => {
-      setData(docSnapshot.data());
+    const getImages = async () => {
+      const docSnapshot = await getDoc(docRef);
       // @ts-ignore
       const { cards } = docSnapshot.data();
       const cardImages: any[] = [];
-      cards.forEach((cardIdx: string) => {
+      for (let cardIdx in cards) {
         const fileRef = ref(
           storage,
           `special-cards/special-card-${cardIdx}.png`,
         );
-        getDownloadURL(fileRef).then((downloadUrl) => {
-          console.log(downloadUrl);
+        await getDownloadURL(fileRef).then((downloadUrl) => {
           cardImages.push(downloadUrl);
         });
-      });
-      setImages(cardImages);
-      console.log(cards);
-    });
+      }
+      setImages([...cardImages]);
+    };
+    getImages();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!data) return null;
+  if (!images) return null;
+
   return (
-    <Box flex justify="center" align="center">
-      {data?.cards.join(', ')}
-      <Image fit="cover" src={image} />
+    <Box flex justify="center" align="center" direction="row">
+      {images.map((imageUrl: string, idx: string) => (
+        <Image src={imageUrl} key={idx} />
+      ))}
     </Box>
   );
 };
