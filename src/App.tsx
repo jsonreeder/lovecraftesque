@@ -182,8 +182,7 @@ const Session = () => {
   const [data, setData] = useState<any>(null);
   useEffect(() => {
     getDoc(docRef).then((res) => setData(res.data()));
-    // @ts-ignore
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data) return null;
 
