@@ -203,7 +203,11 @@ const Player = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data) return null;
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <Box flex justify="center" align="center">
+      {data?.cards.join(', ')}
+    </Box>
+  );
 };
 
 const Session = () => {
@@ -218,7 +222,7 @@ const Session = () => {
 
   if (!data) return null;
   return (
-    <Box>
+    <Box flex justify="center" align="center">
       {data.map((el: string, idx: number) => (
         <Link to={`/sessions/${sessionId}/players/${el}`}>
           Player {idx + 1}
