@@ -189,7 +189,7 @@ const Session = () => {
   return (
     <Box flex justify="center" align="center">
       {data.map((el: string, idx: number) => (
-        <Link to={`/sessions/${sessionId}/players/${el}`}>
+        <Link to={`/sessions/${sessionId}/players/${el}`} key={idx}>
           Player {idx + 1}
         </Link>
       ))}
