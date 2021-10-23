@@ -33,6 +33,7 @@ import {
   Route,
   Link,
   useParams,
+  useHistory,
 } from 'react-router-dom';
 
 const firebaseConfig = {
@@ -122,6 +123,7 @@ type PickerProps = {
 
 const Picker = (props: PickerProps) => {
   const { numberOfPlayers, setNumberOfPlayers } = props;
+  const history = useHistory();
 
   return (
     <Box flex align="center" justify="center">
@@ -150,9 +152,12 @@ const Picker = (props: PickerProps) => {
           <Button
             icon={<FormNextLink />}
             hoverIndicator
-            onClick={() =>
-              addDoc(collection(db, 'sessions'), { numberOfPlayers })
-            }
+            onClick={async () => {
+              const docRef = await addDoc(collection(db, 'sessions'), {
+                numberOfPlayers,
+              });
+              history.push(`/sessions/${docRef.id}`);
+            }}
           />
         </CardFooter>
       </Card>
@@ -179,9 +184,12 @@ const Session = () => {
   const [data, setData] = useState<any>(null);
   useEffect(() => {
     getDoc(docRef).then((res) => setData(res.data()));
-  });
+    // @ts-ignore
+  }, []);
 
-  return <div>{data?.numberOfPlayers}</div>;
+  if (!data) return null;
+
+  return <CardAssignments numberOfPlayers={data?.numberOfPlayers} />;
 };
 
 function App() {
