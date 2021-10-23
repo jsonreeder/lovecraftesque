@@ -7,6 +7,7 @@ import {
   getDocs,
   getFirestore,
 } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import {
   Box,
   Button,
@@ -19,6 +20,7 @@ import {
   Heading,
   Layer,
   ResponsiveContext,
+  Image,
 } from 'grommet';
 import {
   Add,
@@ -161,16 +163,25 @@ const Player = () => {
     useParams<{ sessionId: string; playerId: string }>();
   const docRef = doc(db, 'sessions', sessionId, 'players', playerId);
   const [data, setData] = useState<any>(null);
+  const [image, setImage] = useState<any>(null);
   useEffect(() => {
     getDoc(docRef).then((res) => {
       setData(res.data());
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const storage = getStorage(app);
+  const fileRef = ref(storage, 'special-cards/special-card-0.png');
+  getDownloadURL(fileRef).then((res) => {
+    console.log(res);
+    setImage(res);
+  });
+
   if (!data) return null;
   return (
     <Box flex justify="center" align="center">
       {data?.cards.join(', ')}
+      <Image fit="cover" src={image} />
     </Box>
   );
 };
