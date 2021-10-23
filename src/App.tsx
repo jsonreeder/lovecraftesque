@@ -1,3 +1,12 @@
+import { initializeApp } from 'firebase/app';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+} from 'firebase/firestore';
 import {
   Box,
   Button,
@@ -10,7 +19,6 @@ import {
   Heading,
   Layer,
   ResponsiveContext,
-  List,
 } from 'grommet';
 import {
   Add,
@@ -19,23 +27,14 @@ import {
   Notification,
   Subtract,
 } from 'grommet-icons';
-import React, { useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
-import {
-  addDoc,
-  collection,
-  getFirestore,
-  doc,
-  getDoc,
-  getDocs,
-} from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-  useHistory,
   Link,
+  Route,
+  Switch,
+  useHistory,
+  useParams,
 } from 'react-router-dom';
 
 const firebaseConfig = {
@@ -83,40 +82,6 @@ function shuffleArray(array: any) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
-
-type CardAssignmentsProps = {
-  numberOfPlayers: number;
-};
-
-const CardAssignments = (props: CardAssignmentsProps) => {
-  const { numberOfPlayers } = props;
-  const cardCount = 20;
-  const cardsPerPlayer = numberOfPlayers === 2 ? 2 : 1;
-  const cards = Array.from(Array(cardCount).keys());
-  shuffleArray(cards);
-
-  const choices: any[] = [];
-  Array.from(Array(numberOfPlayers)).forEach(() =>
-    choices.push(cards.splice(0, cardsPerPlayer)),
-  );
-
-  return (
-    <Box flex align="center" justify="center">
-      <Card height="small" width="small" background="light-1">
-        <CardHeader pad="medium">Cards</CardHeader>
-        <CardBody pad="medium">
-          <Box flex align="center" justify="center">
-            {[...Array(numberOfPlayers)].map((el, idx) => (
-              <div key={idx}>
-                Player {idx + 1}: {choices[idx].join(', ')}
-              </div>
-            ))}
-          </Box>
-        </CardBody>
-      </Card>
-    </Box>
-  );
-};
 
 type PickerProps = {
   numberOfPlayers: number;
