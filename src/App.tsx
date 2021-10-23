@@ -155,6 +155,18 @@ const Picker = (props: PickerProps) => {
               const docRef = await addDoc(collection(db, 'sessions'), {
                 numberOfPlayers,
               });
+
+              const cardCount = 20;
+              const cardsPerPlayer = numberOfPlayers === 2 ? 2 : 1;
+              const cards = Array.from(Array(cardCount).keys());
+              shuffleArray(cards);
+
+              Array.from(Array(numberOfPlayers)).forEach(() =>
+                addDoc(collection(db, 'sessions', docRef.id, 'players'), {
+                  cards: cards.splice(0, cardsPerPlayer),
+                }),
+              );
+
               history.push(`/sessions/${docRef.id}`);
             }}
           />
