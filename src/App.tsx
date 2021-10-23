@@ -35,6 +35,7 @@ import {
   Route,
   useParams,
   useHistory,
+  Link,
 } from 'react-router-dom';
 
 const firebaseConfig = {
@@ -201,7 +202,15 @@ const Session = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data) return null;
-  return <List data={data}></List>;
+  return (
+    <Box>
+      {data.map((el: string, idx: number) => (
+        <Link to={`/sessions/${sessionId}/players/${el}`}>
+          Player {idx + 1}
+        </Link>
+      ))}
+    </Box>
+  );
 };
 
 function App() {
