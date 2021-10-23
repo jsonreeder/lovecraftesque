@@ -163,19 +163,29 @@ const Player = () => {
     useParams<{ sessionId: string; playerId: string }>();
   const docRef = doc(db, 'sessions', sessionId, 'players', playerId);
   const [data, setData] = useState<any>(null);
+  const storage = getStorage(app);
   const [image, setImage] = useState<any>(null);
+  const [images, setImages] = useState<any>([]);
   useEffect(() => {
-    getDoc(docRef).then((res) => {
-      setData(res.data());
+    getDoc(docRef).then((docSnapshot) => {
+      setData(docSnapshot.data());
+      // @ts-ignore
+      const { cards } = docSnapshot.data();
+      const cardImages: any[] = [];
+      cards.forEach((cardIdx: string) => {
+        const fileRef = ref(
+          storage,
+          `special-cards/special-card-${cardIdx}.png`,
+        );
+        getDownloadURL(fileRef).then((downloadUrl) => {
+          console.log(downloadUrl);
+          cardImages.push(downloadUrl);
+        });
+      });
+      setImages(cardImages);
+      console.log(cards);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const storage = getStorage(app);
-  const fileRef = ref(storage, 'special-cards/special-card-0.png');
-  getDownloadURL(fileRef).then((res) => {
-    console.log(res);
-    setImage(res);
-  });
 
   if (!data) return null;
   return (
