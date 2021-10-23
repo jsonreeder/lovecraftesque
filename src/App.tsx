@@ -209,12 +209,10 @@ const Session = () => {
   return (
     <Box flex justify="center" align="center">
       {data.map((el: string, idx: number) => (
-        <Card height="small" width="small" background="light">
+        <Card height="small" width="small" background="light" key={idx}>
           <CardHeader pad="medium">Player {idx + 1}</CardHeader>
           <CardBody pad="medium">
-            <Link to={`/sessions/${sessionId}/players/${el}`} key={idx}>
-              See cards
-            </Link>
+            <Link to={`/sessions/${sessionId}/players/${el}`}>See cards</Link>
           </CardBody>
         </Card>
       ))}
