@@ -187,9 +187,9 @@ const Player = () => {
   if (!images) return null;
 
   return (
-    <Box flex justify="center" align="center" direction="row">
+    <Box flex justify="center" align="center" margin="small" pad="large">
       {images.map((imageUrl: string, idx: string) => (
-        <Image src={imageUrl} key={idx} />
+        <Image src={imageUrl} key={idx} height="50%" margin="small" />
       ))}
     </Box>
   );
