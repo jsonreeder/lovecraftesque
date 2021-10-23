@@ -191,6 +191,21 @@ const AppBody = () => {
   );
 };
 
+const Player = () => {
+  const { sessionId, playerId } =
+    useParams<{ sessionId: string; playerId: string }>();
+  const docRef = doc(db, 'sessions', sessionId, 'players', playerId);
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    getDoc(docRef).then((res) => {
+      setData(res.data());
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!data) return null;
+  return <div>{JSON.stringify(data)}</div>;
+};
+
 const Session = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const collectionRef = collection(db, 'sessions', sessionId, 'players');
@@ -233,6 +248,9 @@ function App() {
               </AppBar>
               <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
                 <Switch>
+                  <Route path="/sessions/:sessionId/players/:playerId">
+                    <Player />
+                  </Route>
                   <Route path="/sessions/:sessionId">
                     <Session />
                   </Route>
