@@ -10,6 +10,7 @@ import {
   Heading,
   Layer,
   ResponsiveContext,
+  List,
 } from 'grommet';
 import {
   Add,
@@ -195,16 +196,12 @@ const Session = () => {
   const [data, setData] = useState<any>(null);
   useEffect(() => {
     getDocs(collectionRef).then((res) => {
-      setData(res);
-      res.forEach((el) => console.log(el.id));
+      setData(res.docs.map((el) => el.id));
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log(data);
-
   if (!data) return null;
-  return null;
-  // return <div>{data?.map((el: any) => el.id)}</div>;
+  return <List data={data}></List>;
 };
 
 function App() {
