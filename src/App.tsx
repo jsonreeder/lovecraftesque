@@ -170,7 +170,6 @@ const Player = () => {
       // @ts-ignore
       const { cards } = docSnapshot.data();
       const cardImages: any[] = [];
-      console.log(cards);
       for (let cardIdx in cards) {
         const fileRef = ref(
           storage,
@@ -210,9 +209,14 @@ const Session = () => {
   return (
     <Box flex justify="center" align="center">
       {data.map((el: string, idx: number) => (
-        <Link to={`/sessions/${sessionId}/players/${el}`} key={idx}>
-          Player {idx + 1}
-        </Link>
+        <Card height="small" width="small" background="light">
+          <CardHeader pad="medium">Player {idx + 1}</CardHeader>
+          <CardBody pad="medium">
+            <Link to={`/sessions/${sessionId}/players/${el}`} key={idx}>
+              See cards
+            </Link>
+          </CardBody>
+        </Card>
       ))}
     </Box>
   );
