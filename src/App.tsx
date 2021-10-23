@@ -31,7 +31,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useParams,
   useHistory,
 } from 'react-router-dom';
@@ -173,7 +172,6 @@ const AppBody = () => {
         numberOfPlayers={numberOfPlayers}
         setNumberOfPlayers={setNumberOfPlayers}
       />
-      <CardAssignments numberOfPlayers={numberOfPlayers} />
     </Box>
   );
 };
