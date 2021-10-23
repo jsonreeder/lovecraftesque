@@ -18,7 +18,7 @@ import {
   Notification,
   Subtract,
 } from 'grommet-icons';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import {
   addDoc,
@@ -176,9 +176,12 @@ const AppBody = () => {
 const Session = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const docRef = doc(db, 'sessions', sessionId);
-  getDoc(docRef).then((res) => console.log(res.data()));
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    getDoc(docRef).then((res) => setData(res.data()));
+  });
 
-  return <div>{sessionId}</div>;
+  return <div>{data?.numberOfPlayers}</div>;
 };
 
 function App() {
