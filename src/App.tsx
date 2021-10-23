@@ -228,7 +228,7 @@ function App() {
             <Box fill>
               <AppBar>
                 <Heading level="3" margin="none">
-                  Lovecraftesque
+                  <Link to="/">Lovecraftesque</Link>
                 </Heading>
                 <Button
                   icon={<Notification />}
