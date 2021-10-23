@@ -170,10 +170,11 @@ const Player = () => {
       // @ts-ignore
       const { cards } = docSnapshot.data();
       const cardImages: any[] = [];
+      console.log(cards);
       for (let cardIdx in cards) {
         const fileRef = ref(
           storage,
-          `special-cards/special-card-${cardIdx}.png`,
+          `special-cards/special-card-${cards[cardIdx]}.png`,
         );
         await getDownloadURL(fileRef).then((downloadUrl) => {
           cardImages.push(downloadUrl);
