@@ -26,6 +26,7 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
 } from 'firebase/firestore';
 import {
   BrowserRouter as Router,
@@ -190,15 +191,20 @@ const AppBody = () => {
 
 const Session = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
-  const docRef = doc(db, 'sessions', sessionId);
+  const collectionRef = collection(db, 'sessions', sessionId, 'players');
   const [data, setData] = useState<any>(null);
   useEffect(() => {
-    getDoc(docRef).then((res) => setData(res.data()));
+    getDocs(collectionRef).then((res) => {
+      setData(res);
+      res.forEach((el) => console.log(el.id));
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!data) return null;
+  console.log(data);
 
-  return <CardAssignments numberOfPlayers={data?.numberOfPlayers} />;
+  if (!data) return null;
+  return null;
+  // return <div>{data?.map((el: any) => el.id)}</div>;
 };
 
 function App() {
