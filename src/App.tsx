@@ -7,8 +7,9 @@ import {
   getDocs,
   getFirestore,
 } from 'firebase/firestore';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import {
+  Anchor,
   Box,
   Button,
   Card,
@@ -18,17 +19,12 @@ import {
   Collapsible,
   Grommet,
   Heading,
-  Layer,
-  ResponsiveContext,
   Image,
+  Layer,
+  Paragraph,
+  ResponsiveContext,
 } from 'grommet';
-import {
-  Add,
-  FormClose,
-  FormNextLink,
-  Notification,
-  Subtract,
-} from 'grommet-icons';
+import { Add, Catalog, FormClose, FormNextLink, Subtract } from 'grommet-icons';
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -234,7 +230,7 @@ function App() {
                   <Link to="/">Lovecraftesque</Link>
                 </Heading>
                 <Button
-                  icon={<Notification />}
+                  icon={<Catalog />}
                   onClick={() => setShowSidebar(!showSidebar)}
                 />
               </AppBar>
@@ -259,8 +255,24 @@ function App() {
                       elevation="small"
                       align="center"
                       justify="center"
+                      pad="large"
                     >
-                      sidebar
+                      <Paragraph>
+                        This app helps people play Lovecraftesque online.
+                      </Paragraph>
+                      <Paragraph>
+                        You can use it to deal each player a Special Card.
+                      </Paragraph>
+                      <Paragraph>
+                        Lovecraftesque is a storytelling game written by Becky
+                        Annison and Josh Fox and pubished by Black Armada. You
+                        can buy it{' '}
+                        <Anchor
+                          href="https://blackarmada.com/lovecraftesque/"
+                          label="here"
+                        ></Anchor>
+                        .
+                      </Paragraph>
                     </Box>
                   </Collapsible>
                 ) : (

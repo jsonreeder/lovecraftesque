@@ -1,8 +1,10 @@
 # Lovecraftesque
 
-A fanfiction tool to play Lovecraftesque online. Deployed here: https://lovecraftesque.web.app/
+This app helps people play Lovecraftesque online. 
 
-You can learn more about the game Lovecraftesque here: https://blackarmada.com/lovecraftesque/.
+You can access it here: https://lovecraftesque.web.app/
+
+Lovecraftesque is a storytelling game written by Becky Annison and Josh Fox and pubished by Black Armada. You can buy it here: https://blackarmada.com/lovecraftesque/.
 
 ## Run locally
 
