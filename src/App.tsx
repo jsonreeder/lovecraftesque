@@ -28,7 +28,6 @@ import { Add, Catalog, FormClose, FormNextLink, Subtract } from 'grommet-icons';
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Switch,
   useHistory,
@@ -208,7 +207,9 @@ const Session = () => {
         <Card height="small" width="small" background="light" key={idx}>
           <CardHeader pad="medium">Player {idx + 1}</CardHeader>
           <CardBody pad="medium">
-            <Link to={`/sessions/${sessionId}/players/${el}`}>See cards</Link>
+            <Anchor href={`/sessions/${sessionId}/players/${el}`}>
+              See cards
+            </Anchor>
           </CardBody>
         </Card>
       ))}
@@ -243,7 +244,7 @@ function App() {
             <Box fill>
               <AppBar>
                 <Heading level="3" margin="none">
-                  <Link to="/">Lovecraftesque</Link>
+                  <Anchor href="/">Lovecraftesque</Anchor>
                 </Heading>
                 <Button
                   icon={<Catalog />}
