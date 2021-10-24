@@ -216,6 +216,22 @@ const Session = () => {
   );
 };
 
+const SideBarBody = () => (
+  <Box>
+    <Paragraph>This app helps people play Lovecraftesque online.</Paragraph>
+    <Paragraph>You can use it to deal each player a Special Card.</Paragraph>
+    <Paragraph>
+      Lovecraftesque is a storytelling game written by Becky Annison and Josh
+      Fox and pubished by Black Armada. You can buy it{' '}
+      <Anchor
+        href="https://blackarmada.com/lovecraftesque/"
+        label="here"
+      ></Anchor>
+      .
+    </Paragraph>
+  </Box>
+);
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -257,22 +273,7 @@ function App() {
                       justify="center"
                       pad="large"
                     >
-                      <Paragraph>
-                        This app helps people play Lovecraftesque online.
-                      </Paragraph>
-                      <Paragraph>
-                        You can use it to deal each player a Special Card.
-                      </Paragraph>
-                      <Paragraph>
-                        Lovecraftesque is a storytelling game written by Becky
-                        Annison and Josh Fox and pubished by Black Armada. You
-                        can buy it{' '}
-                        <Anchor
-                          href="https://blackarmada.com/lovecraftesque/"
-                          label="here"
-                        ></Anchor>
-                        .
-                      </Paragraph>
+                      <SideBarBody />
                     </Box>
                   </Collapsible>
                 ) : (
@@ -294,8 +295,9 @@ function App() {
                       background="light-2"
                       align="center"
                       justify="center"
+                      pad="large"
                     >
-                      sidebar
+                      <SideBarBody />
                     </Box>
                   </Layer>
                 )}
